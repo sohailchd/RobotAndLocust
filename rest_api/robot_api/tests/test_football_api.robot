@@ -3,8 +3,8 @@ DOCUMENTATION       Testing the https://www.football-data.org public API
 
 Resource            ../res/test_football_api.robot
 
+# Test Template         Test the API resource and verify the status code
 
-## https://github.com/robotframework/HowToWriteGoodTestCases/blob/master/HowToWriteGoodTestCases.rst
 
 *** Variables *** 
 ${status_200}            200
@@ -27,6 +27,9 @@ Test all the competions
 *** Keywords *** 
 
 Test get competitions with uri ${uri} and status code ${code}
-    Request get with uri ${uri} and verify if reposne status code is equal to ${code}
-    Test log data data1   
+    Request get with uri ${uri} with request type ${rtype}
+    verify response ${res} status code equals expected code ${expected_code}   
 
+
+# Test the API resource and verify the status code
+#         [Arguments]              ${url}        ${resquest_type}       ${expected_res_code}
