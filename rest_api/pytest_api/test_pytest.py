@@ -4,6 +4,7 @@ import json
 import pytest
 import logging
 
+
 base_url = "https://api.football-data.org/"
 log = logging.getLogger(__name__)
 
@@ -12,12 +13,15 @@ auth_token = {
 }
 
 
+##### additional summary 
+
 
 @pytest.mark.competitions
 @pytest.mark.all
 class TestCompetitions():
 
 
+    
     def test_get_competitions(self):
         '''
         uri : /v2/competitions/
@@ -27,9 +31,16 @@ class TestCompetitions():
         '''
         uri = base_url + "/v2/competitions"
         response = requests.get(uri,headers=auth_token)
-        print(response.status_code)
+        print(f"Response : {response.status_code}")
         print(response.headers)
-    
+        ## assert expected status code
+        assert response.status_code == 200
+        ## assert response 
+        response_content = response.json() 
+        print(response_content)
+        assert response_content , ("Response is empty")
+
+
 
     
     @pytest.mark.competitions_filter
@@ -45,14 +56,15 @@ class TestCompetitions():
         tiers_list = ['TIER_ONE','TIER_TWO','TIER_THREE','TIER_FOUR']
         for tier in tiers_list:
             uri_plan = base_url + "/v2/competitions?plan=" + str(tier)
-            response = requests.get(url=uri_plan)
+            response = requests.get(url=uri_plan,headers=auth_token)
             assert response.status_code == 200
-            log.info(response.status_code)
+            print(f"Response code for {tier} : {response.status_code}")
             json_res = response.json()
             for com in json_res['competitions']:
                 assert com['plan'] == str(tier)
         
 
+    @pytest.mark.particular_competition
     def test_particular_competition(self):
         '''
             uri : /v2/competitions/2000
@@ -61,11 +73,16 @@ class TestCompetitions():
                    response should have details of particular competitions
         '''
         uri = base_url + "/v2/competitions/2000"
-        response = requests.get(uri)
-        print(response.status_code)
+        response = requests.get(uri,headers=auth_token)
+        print(f"Response : {response.status_code}")
+        assert response.status_code == 200
+        print(response.json())
+        assert response.json()['area'] , ("area info for competition id: 2000 is empty")
+
 
 
     @pytest.mark.error_code
+    @pytest.mark.xfail
     def test_get_competitions_wrong_uri(self):
         ''' 
           url : v2/competitions/areases
@@ -79,7 +96,7 @@ class TestCompetitions():
         ## verify if proper error msg is send in the response
         expected_error_msg = "Parameter 'competitionId' is expected to be either an integer in a specified range or a competition code."
         print(response.json()['message'])
-        print(response.status_code)
+        print(f"Response : {response.status_code}")
         assert response.json()['message'] == expected_error_msg
     
 
@@ -88,8 +105,7 @@ class TestCompetitions():
 @pytest.mark.all
 class TestTeams():
 
-
-    
+   
     def test_list_team_for_competition_id(self):
         '''
         uri : "/v2/competitions/{id}/teams" 
@@ -99,7 +115,7 @@ class TestTeams():
         '''
         url = base_url + "/v2/competitions/2000/teams"
         response = requests.get(url,headers=auth_token)
-        print(response.status_code)
+        print(f"Response : {response.status_code}")
         assert response.status_code == 200 
         ## verify if the json have competition with id=2000 
         print(response.json()['competition']['id'])
@@ -116,9 +132,12 @@ class TestTeams():
                status == 405 
         '''
         url = base_url + "/v2/competitions/2000/teams"
-        response = requests.post(url)
+        response = requests.post(url,headers=auth_token)
         print(response.json())
-        print(response.status_code)
+        print(f"Response : {response.status_code}")
+        assert response.status_code == 405
+
+
 
 
 @pytest.mark.matches
@@ -126,18 +145,87 @@ class TestTeams():
 class TestMatches():
     
 
-    @pytest.mark.error_code
-    def test_upcomming_matches(self):
-        '''
-            uri : "v2/teams/86/matches?status=SCHEDULED"
-            test : expected status
-        '''
-        uri = base_url + "v2/teams/86/matches?status=SCHEDULED"
-        response = requests.get(uri)
-        assert response.status_code == 403
+        @pytest.mark.error_code
+        @pytest.mark.xfail 
+        def test_upcomming_matches_without_auth(self):
+            '''
+                uri : "v2/teams/86/matches?status=SCHEDULED"
+                test : expected status == 403
+            '''
+            uri = base_url + "v2/teams/86/matches?status=SCHEDULED"
+            ### send request without auth-token
+            response = requests.get(uri)
+            print(f"Response : {response.status_code}")
+            assert response.status_code == 403
 
         
+        def test_upcomming_matches(self):
+            '''
+                uri : "v2/teams/86/matches?status=SCHEDULED"
+                test : expected status == 200
+            '''
+            uri = base_url + "v2/teams/86/matches?status=SCHEDULED"
+            ### send request without auth-token
+            response = requests.get(uri,headers=auth_token)
+            print(f"Response : {response.status_code}")
+            assert response.status_code == 200
+            print(response.json())
+            assert response.json()['count'] == 24
+
+
+
+        @pytest.mark.error_code
+        @pytest.mark.xfail
+        def test_match_across_competitions_with_wrong_uri(self):
+            '''
+                uri : /v2/matche "instead of" /v2/macthes
+                test : List matches across (a set of) competitions.
+                       expected response code == 404
+            '''
+
+            url = base_url + '/v2/matche'
+
+            response = requests.get(url,headers=auth_token)
+            print(f"Response : {response.status_code}")
+            assert response.status_code == 404
+            print(response.headers)
+
+
+
+        @pytest.mark.error_code
+        @pytest.mark.xfail
+        def test_match_across_competitions(self):
+            '''
+                uri : /
+                test : disable redirection verify
+                       expected response code == 301
+            '''
+
+            url = base_url + '/'
+
+            response = requests.get(url,headers=auth_token,allow_redirects=False)
+            print(f"Response : {response.status_code}")
+            assert response.status_code == 301
+            print(response.headers)
+        
+
                 
 
+
+@pytest.mark.areas
+@pytest.mark.all
 class TestAreas():
-    pass
+    
+
+    def list_one_particular_area(self):
+        '''
+            uri : /v2/areas/
+            test : List all available areas.
+                   expected_status code == 200
+        '''
+        url = base_url + "/v2/areas"
+        response = requests.get(url,headers=auth_token)
+        print(f"Response : {response.status_code}")
+        assert response.status_code == 200 
+
+        
