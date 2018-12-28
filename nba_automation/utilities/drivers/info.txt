@@ -1,0 +1,2 @@
+1. please download the chrome driver and save in in 'nba_automation\utilities\drivers\chromedriver.exe'
+2. please download the chrome driver and save in in 'nba_automation\utilities\drivers\geckodriver.exe'

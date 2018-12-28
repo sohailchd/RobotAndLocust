@@ -1,0 +1,4 @@
+Download the latest firefox and chrome drivers for linux in this folder.
+
+chromedriver
+geckodriver

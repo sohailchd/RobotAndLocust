@@ -1,0 +1,4 @@
+Download the latest firefox and chrome drivers for windows in this folder.
+
+chromedriver.exe
+geckodriver.exe
