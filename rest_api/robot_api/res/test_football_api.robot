@@ -4,18 +4,23 @@ Library     ../test_src/FootBallAPICalls.py
 Library     Collections
 
 
+*** Variables ***
+${response}    =      None
+
+
 *** Keywords *** 
 
 
-verify response ${res} if status code equals expected code ${expected_code}
-    verify_response_with_expected_code     res=${res}      expected_code=${expected_code}       
+verify response status code equals expected code "${expected_code}"
+    verify_response_with_expected_code         expected_code=${expected_code}         
 
-Request get with uri ${uri} and verify if reposne status code is equal to ${expected_code}
-    ${res}=         get_request     uri=${uri}         head_data=${None}
-    Log       ${res}  
-    verify response ${res} if status code equals expected code ${expected_code}        
 
-Test log data ${data1}
-    Log   "Simple text"
-    ${test_data}=       test_print    strp=${data1}
-    LOG     ${test_data}
+Send request with uri "${uri}" and request type "${rtype}"     
+    ${response}=              send_request     uri=${uri}       rtype=${rtype}   head_data=${None}
+    Log       ${response}   
+    Return From Keyword       ${response} 
+
+
+
+
+
