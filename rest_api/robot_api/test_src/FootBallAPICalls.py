@@ -21,37 +21,54 @@ class FootBallAPICalls():
     ROBOT_LIBRARY_SCOPE = 'TEST CASE'
 
 
+    def __init__(self):
+        self.response = None
+
     def test_print(self,strp):
         print(strp)
         return "test data"
 
     @keyword
-    def get_request(self,uri,head_data={}):
+    def send_request(self,uri,rtype="GET",head_data={},post_data={}):
         '''
         '''
         if not uri:
             raise ValueError("uri parameter is None")
         
         url = base_url + uri
-        print(url)
-        
+        print(f"final url : {url}")
+
         response = None
         if head_data:
             header.update(head_data)
         
-        response = requests.get(url,headers=header)
-        print(response)
-        res_dict = {
+        if rtype.upper() == "GET":
+            response = requests.get(url,headers=header)
+        elif rtype.upper() == "POST":
+            response = requests.post(url,headers=header,data=post_data)
+        elif rtype.upper() == "GET_WITHOUT_AUTH":
+            response = requests.get(url)
+        else:
+            ## default type is GET
+             response = requests.get(url,headers=header)
+        
+        
+        print(f"Response from the {rtype} call ({url}) : {response}")
+
+        self.res_dict = {
             'status_code' : response.status_code,
             'response_json' : response.json(),
             'response_header' : response.headers
         }
 
-        return res_dict
+        return self.res_dict
     
 
-    def verify_response_with_expected_code(self,res,expected_code):
+    def verify_response_with_expected_code(self,expected_code):
         '''
         '''
-        status_code = res['status_code']
-        assert  status_code == int(expected_code),     f"status code is not equal to expected value, {status_code} != {res['status_code']}"
+        if not self.res_dict:
+            raise ValueError("No HTTPS response found.")
+
+        status_code = self.res_dict['status_code']
+        assert  status_code == int(expected_code),     f"status code is not equal to expected value, {expected_code} != {self.res_dict['status_code']}"
