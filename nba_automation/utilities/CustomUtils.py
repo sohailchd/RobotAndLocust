@@ -1,4 +1,6 @@
 from utilities.BrowserManager import BrowserManager
+import conf
+from robot.api import logger
 
 class CustomUtils():
     '''
@@ -34,3 +36,14 @@ class CustomUtils():
         print(f"Page refresh called on : {BrowserManager.get_browser().current_url}")
         BrowserManager.get_browser().refresh()
 
+    @classmethod
+    def take_screenshot(self,fname,dir=conf.report_dir_fs):
+        '''
+        '''
+        fileName = conf.report_dir_fs + fname
+        BrowserManager.get_browser().get_screenshot_as_file(fileName)
+    
+
+    @classmethod
+    def embed_screenshot(self,imgSrc=None,test_name=None):
+        logger.warn(f'<a href="{imgSrc}"> Failed screenshot for {test_name} </a>', html=True)

@@ -11,8 +11,12 @@ from selenium.webdriver.chrome.options import Options
 
 
 present_dir = conf.present_dir
-firefox_driver_path = os.path.join(present_dir,'nba_automation/utilities/drivers/geckodriver.exe')
-chrome_driver_path = os.path.join(present_dir,'nba_automation/utilities/drivers/chromedriver.exe')  ## path to the chrome driver
+if os.name == 'nt':
+    firefox_driver_path = os.path.join(present_dir,'utilities/drivers/win/geckodriver.exe')
+    chrome_driver_path = os.path.join(present_dir,'utilities/drivers/win/chromedriver.exe')  ## path to the chrome driver
+if os.name == 'linux':
+    pass
+
 safari_driver_path = ""  ## path to the safari driver
 
 
@@ -67,7 +71,7 @@ class BrowserManager():
                     cls.driver = webdriver.Firefox(executable_path=firefox_driver_path) 
                     print(f"driver session id :  {cls.driver.session_id}")
                     ## implicit wait for 15secs
-                    cls.driver.implicitly_wait(15)
+                    cls.driver.implicitly_wait(conf.IMPLICIT_WAIT)
                     cls.driver.maximize_window()
                     cls.driver.get(base_url)
                     sleep(3)
@@ -87,7 +91,7 @@ class BrowserManager():
                     cls.driver = webdriver.Chrome(executable_path=chrome_driver_path,chrome_options=chrome_options) 
                     print(f"driver session id :  {cls.driver.session_id}")
                     ## implicit wait for 15secs
-                    cls.driver.implicitly_wait(15)
+                    cls.driver.implicitly_wait(conf.IMPLICIT_WAIT)
                     cls.driver.maximize_window()
                     cls.driver.get(base_url)
                     sleep(3)
@@ -109,9 +113,8 @@ class BrowserManager():
                     if cls.driver:
                         try:
                             cls.driver.close()
-                        except WebDriverException as e:
-                            print(f"failed to close browser : {e}")
-                        finally:
-                            cls.driver.quit()
+                            print("Browser Successfully closed.")
+                        except WebDriverException:
+                            print(f"")
                     else:
                         raise TypeError("No browser initailzed.")
