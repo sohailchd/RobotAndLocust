@@ -7,7 +7,7 @@ Documentation                    Create a test which checks top three players on
 Resource                         nba_leaders_res.robot 
 Resource                         utilities.robot 
 
-Default Tags                     all   leaders  
+Default Tags                     all     leaders  
 
 *** Variables ***
 ${top}                           3
@@ -15,7 +15,7 @@ ${top}                           3
 
 *** Test Cases *** 
 Verify stats of the top 3 players 
-    [tags]        wip
+
     @{TOP_PLAYERS}=       Get the stats of the top "${3}" players on the leader board
 
     :FOR    ${ELEMENT}    IN    @{TOP_PLAYERS}

@@ -4,7 +4,7 @@ Documentation           NBA tests for stats related to standings :
 ...                     and Western conference during regular season.
 ...                     url: https://stats.nba.com/standings/ 
 
-Default Tags            all   standings    conference
+Default Tags            all     standings    conference
 
 Resource                utilities.robot
 Resource                nba_standings_res.robot
@@ -28,7 +28,7 @@ ${conf_list}                  East,West
 *** Test Cases ***
 
 Verify both the conference are shown and consists of 15 teams each 
-    [tags]       wip
+
     Verify if the NBA Stats page shows table with expected "${conf_list}" conference
     Verify if the NBA Stats page shows consistent conference with each having 15 teams
     Verify win percentage of each team is correct as per their wins and losses proportions
