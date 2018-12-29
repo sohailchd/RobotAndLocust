@@ -48,16 +48,24 @@ class FootBallAPICalls():
             response = requests.post(url,headers=header,data=post_data)
         elif rtype.upper() == "GET_WITHOUT_AUTH":
             response = requests.get(url)
+        elif rtype.upper() == "GET_DISABLE_REDIRECT":
+            response = requests.get(url,headers=header,allow_redirects=False)
         else:
             ## default type is GET
-             response = requests.get(url,headers=header)
+            print("default type request")
+            response = requests.get(url,headers=header)
         
         
         print(f"Response from the {rtype} call ({url}) : {response}")
 
+        try:
+            res_json = response.json()
+        except:
+            res_json = None
+
         self.res_dict = {
             'status_code' : response.status_code,
-            'response_json' : response.json(),
+            'response_json' : res_json,
             'response_header' : response.headers
         }
 
@@ -70,5 +78,6 @@ class FootBallAPICalls():
         if not self.res_dict:
             raise ValueError("No HTTPS response found.")
 
+        print(f"expected : {expected_code} vs actual : {self.res_dict['status_code']}")
         status_code = self.res_dict['status_code']
         assert  status_code == int(expected_code),     f"status code is not equal to expected value, {expected_code} != {self.res_dict['status_code']}"

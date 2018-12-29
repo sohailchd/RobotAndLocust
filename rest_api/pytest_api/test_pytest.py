@@ -124,19 +124,20 @@ class TestTeams():
 
 
     
+    @pytest.mark.error_code
     def test_list_team_competition_id(self):
         '''
         uri : "/v2/competitions/{id}/teams" 
         action : List all teams for a particular competition.
         test : verify if uri returns team for a competition id 
                status == 405 
+               error msg : Method not allowed. Use GET method only.
         '''
         url = base_url + "/v2/competitions/2000/teams"
         response = requests.post(url,headers=auth_token)
         print(response.json())
         print(f"Response : {response.status_code}")
         assert response.status_code == 405
-
 
 
 
@@ -194,7 +195,7 @@ class TestMatches():
 
         @pytest.mark.error_code
         @pytest.mark.xfail
-        def test_match_across_competitions(self):
+        def test_redirection_with_multiple_res(self):
             '''
                 uri : /
                 test : disable redirection verify
