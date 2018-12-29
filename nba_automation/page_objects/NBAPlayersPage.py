@@ -141,9 +141,9 @@ class NBAPlayersPage(BasePage):
         driver.get(self.page_url)
 
         ## wait for stats table to load in the DOM 
-        self.explicit_wait(NBAPlayersLocators.stats_table)
+        self.explicit_wait(NBAPlayersLocators.stats_table,is_visible=True)
         end = time.time()
-        print(f" total time in ms : {end-start}")
+        print(f" total time in secs : {end-start}")
         assert float(end-start) < float(wait_time)  ,  ("Loading time exceeded for the stats table on players page.")
 
     

@@ -4,8 +4,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-
-
 class BasePage():
 
 
@@ -28,15 +26,20 @@ class BasePage():
         return self.page_url
         
     
-    def explicit_wait(self,locator,time=15):
+    def explicit_wait(self,locator,time=20,is_visible=False):
         ''' 
            custom wait for given element
         '''
        
         print(f"locator : {locator}")
-        target = WebDriverWait(self._driver,time).until(
-            EC.presence_of_element_located(locator)
-        )
+        if not is_visible:
+            target = WebDriverWait(self._driver,time).until(
+                EC.presence_of_element_located(locator)
+            )
+        else:
+            target = WebDriverWait(self._driver,time).until(
+                EC.visibility_of_element_located(locator)
+            )
         print(f"exlicit wait, found element {target} ")
         
 
