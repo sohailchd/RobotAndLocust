@@ -12,10 +12,12 @@ ${status_400}            400
 
         
 
-*** Test Cases ***                          resquest_type               url                         expected_res_code    
-List all available competitions               GET                   /v2/competitions/                  200
-List one particular competition               GET                   /v2/competitions
-
+*** Test Cases ***                          resquest_type               url                                      expected_res_code    
+List all available competitions               GET                   v2/competitions/                                    200
+List one particular competition               GET                   v2/competitions                                     200
+Get competitions with wrong uri               GET                   v2/competitions/areases                             400
+Get upcomming matches without auth       GET_WITHOUT_AUTH       v2/teams/86/matches?status=SCHEDULED                    403            
+Get redirection with multiple res        GET_DISABLE_REDIRECT           /                                               301
 
 
 
@@ -23,7 +25,7 @@ List one particular competition               GET                   /v2/competit
 *** Keywords *** 
 
 Test the API resource and verify the status code
-        [Arguments]              ${resquest_type}              ${url}           ${post_data}                 ${expected_res_code}       
+        [Arguments]              ${resquest_type}              ${url}            ${expected_res_code}       
         
-        Send request with uri "${url}" and request type "GET"
+        Send request with uri "${url}" and request type "${resquest_type}"
         verify response status code equals expected code "${expected_res_code}"
