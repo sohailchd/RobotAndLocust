@@ -1,5 +1,6 @@
-from locust import Locust,TaskSet,task, HttpLocust
+from locust import Locust,TaskSet,task, HttpLocust , TaskSequence, seq_task
 import sys, os 
+
 sys.path.append(os.getcwd())
 from common import conf 
 import locust.stats
@@ -44,16 +45,24 @@ class VistHomePageTask(TaskSet):
     '''
 
     @task(10)
-    def visiting_home_page(self):
-        response = self.client.get(conf.base_url)
-        # print(f"Response status code : {response.status_code}")
-        # print(f"Response content : {response.content}")
+    def without_login_homepage(self):
+        self.client.get(conf.base_url)
 
 
-    @task(7)
-    def user_login(self):
-        res = self.client.post(conf.login_url, {'email' : conf.user_email, "password" : conf.auth_token})
-        # print(res.text)
+    @task(5)
+    class LoginFlow(TaskSequence):
+
+            @seq_task(2)
+            def visiting_api_page(self):
+                response = self.client.get(conf.api_url)
+                print(f"Response status code : {response.status_code}")
+                print(f"Response content : {response.content}")
+
+
+            @seq_task(1)
+            def user_login(self):
+                res = self.client.post(conf.login_url, {'email' : conf.user_email, "password" : conf.auth_token})
+                print(res.text)
 
 
 
