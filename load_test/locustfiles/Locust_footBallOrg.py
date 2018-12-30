@@ -3,6 +3,7 @@ import sys, os
 sys.path.append(os.getcwd())
 from common import conf 
 import locust.stats
+import logging
 
 
 locust.stats.CSV_STATS_INTERVAL_SEC = 1
@@ -11,6 +12,7 @@ locust.stats.CSV_STATS_INTERVAL_SEC = 1
 class TaskSetOne(TaskSet):
     '''
         Defines associated behaviours for a particular user/locust
+        * NOT USED IN THIS TEST
     '''
 
     @task(10)
@@ -38,25 +40,22 @@ class TaskSetOne(TaskSet):
 
 class VistHomePageTask(TaskSet):
     '''
-        Simulates only visiting the homepage
+        Simulates login and visit homepage
     '''
 
-    @task
+    @task(10)
     def visiting_home_page(self):
         response = self.client.get(conf.base_url)
-        print(f"Response status code : {response.status_code}")
-        print(f"Response content : {response.content}")
+        # print(f"Response status code : {response.status_code}")
+        # print(f"Response content : {response.content}")
 
 
+    @task(7)
+    def user_login(self):
+        res = self.client.post(conf.login_url, {'email' : conf.user_email, "password" : conf.auth_token})
+        # print(res.text)
 
 
-# class UserVisitsHomePage(Locust):
-#     ''' 
-#         Represents one single user and declares the associated task set
-#     '''
-#     task_set = VistHomePageTask
-#     min_wait = 500
-#     max_wait = 4000
 
 
 class LoadFootballOrg(HttpLocust):
