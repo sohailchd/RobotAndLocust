@@ -1,0 +1,7 @@
+requests==2.20.1
+pytest==4.0.1
+pyquery==1.4.0
+selenium==3.141.0
+beautifulsoup4==4.6.3
+locustio==0.9.0
+robotframework==3.1
