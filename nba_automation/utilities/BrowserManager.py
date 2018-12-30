@@ -14,8 +14,9 @@ present_dir = conf.present_dir
 if os.name == 'nt':
     firefox_driver_path = os.path.join(present_dir,'utilities/drivers/win/geckodriver.exe')
     chrome_driver_path = os.path.join(present_dir,'utilities/drivers/win/chromedriver.exe')  ## path to the chrome driver
-if os.name == 'linux':
-    pass
+if os.name == 'posix':
+    firefox_driver_path = os.path.join(present_dir,'utilities/drivers/linux/geckodriver')
+    chrome_driver_path = os.path.join(present_dir,'utilities/drivers/linux/chromedriver')
 
 safari_driver_path = ""  ## path to the safari driver
 
