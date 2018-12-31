@@ -111,26 +111,51 @@ For Linux :
     $ nba_automation\robot_runner.sh    
 
 
-**rest_api**
+**rest_api**  
 Windows:
 > 
-    $ rest_api\pytest_api\execute_api.bat    
-    $ rest_api\robot_api\execute_robot_tests.bat 
-
+    $ rest_api\pytest_api\execute_api.bat              ### run pytest, find report in 'py_reports/football_api.html'
+    $ rest_api\robot_api\execute_robot_tests.bat       ### run robot tests, find report in 'robot_reports/report.html'
+ 
 
 Linux:
-> 
-    $ rest_api\pytest_api\execute_api.sh      
-    $ rest_api\robot_api\execute_robot_tests.sh 
+>  
+    $ rest_api\pytest_api\execute_api.sh              ### run pytest, find report in 'py_reports/football_api.html'
+    $ rest_api\robot_api\execute_robot_tests.sh       ### run robot tests, find report in 'robot_reports/report.html'
+ 
 
 
 
 ## Deployment
 
 **Jenkins**
-Project can be easily integrated with Jenkins (CI)
+All the windows version jobs has been ported on Jenkins.  
+Please find the jobs configuration files in the 'jenkins_jobs' folder. 
+You have to import the jobs in your Jenkins server. 
 
-**Docker**
+> 
+    1. Make sure 'Test Result Analyzer' and 'Robot Results' plugins are installed in Jenkins.
+    2. All the jobs are parameterized with "root_dir". Please sepecify the root of the test project.   
+    For more information please drop me an email at sohail.chd0202@gmail.com.    
+ 
+## Docker
+
+**load_test**  
+>
+    $ cd basar-sohail-chowdhury/load_test
+    $ sudo docker build . -t load_test
+    $ sudo docker run -v ${PWD}/reports:/usr/src/app/reports -entrypoint="/bin/bash" -i load_test
+
+    Pleas find the reports in 'reports folder'. You should be able to see logs in the console.
+
+**rest_api**
+
+> 
+    $ cd basar-sohail-chowdhury/rest_api
+    $ sudo docker build . -t rest_api_pytest
+    $ sudo docker run -v ${PWD}/pytest_api/py_reports:/usr/src/pytest_api/py_reports -entrypoint="/bin/bash" -i rest_api_pytest
+
+
 
 
 

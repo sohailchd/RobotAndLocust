@@ -39,7 +39,7 @@ c) What is the optimal application response time for modern day web applications
 d) Analyze few HTTP/S responses
 >
     - Please find the HTTP logs in "load_test\reports_final\locust_log.log" 
-    - Please find the "load_test\reports_final\response.png" for graph 
+    - Please find the "load_test\reports_final\correlation.png" for graph 
       showing inscrease in response time with increase in users visiting the site.
 
 

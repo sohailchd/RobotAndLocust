@@ -7,5 +7,5 @@ del %root_dir%reports\*.csv
 del %root_dir%reports\*.log
 
 
-locust -f  %root_dir%locustfiles\Locust_footBallOrg.py --no-web -c 1000 -r 67 --run-time 15sec --print-stats --only-summary ^
+C:\Python\Scripts\locust.exe -f  %root_dir%locustfiles\Locust_footBallOrg.py --no-web -c 1000 -r 67 --run-time 15sec --print-stats --only-summary ^
 --csv=%root_dir%reports\locust_report  --logfile %root_dir%reports\locust_log.log
