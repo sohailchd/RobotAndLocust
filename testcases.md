@@ -62,11 +62,12 @@ There 3 different sections of the website covered by the automation.
     4. Test loading time for the stats segment is below specified time limit    
                 - We try to verify if the stats table laods wihin specffic time    
 
-> Bugs:  
-    1. Test player PTS shown before and after applying filters are same, not changed      
-                 - "Player PTS differ for HOU"  , Following keys have different values: Key Austin Rivers: 7.5 != 10.0   
+> 
+    Bugs:  
+        1. Test player PTS shown before and after applying filters are same, not changed      
+                    - "Player PTS differ for HOU"  , Following keys have different values: Key Austin Rivers: 7.5 != 10.0   
 
-    2. Test loading time for the stats segment is below specified time limit     # [FAILS] intermittent
+        2. Test loading time for the stats segment is below specified time limit     # [FAILS] intermittent
 
 
 **- Leaders stats**
