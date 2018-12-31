@@ -65,8 +65,7 @@ There 3 different sections of the website covered by the automation.
 > 
     Bugs:  
         1. Test player PTS shown before and after applying filters are same, not changed      
-                    - "Player PTS differ for HOU"  , Following keys have different values: Key Austin Rivers: 7.5 != 10.0   
-
+                    - "Player PTS differ for HOU"  , Following keys have different values: Key Austin Rivers: 7.5 != 10.0  
         2. Test loading time for the stats segment is below specified time limit     # [FAILS] intermittent
 
 
