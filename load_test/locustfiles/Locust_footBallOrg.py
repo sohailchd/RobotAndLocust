@@ -4,10 +4,6 @@ import sys, os
 sys.path.append(os.getcwd())
 from common import conf 
 import locust.stats
-import logging
-
-
-locust.stats.CSV_STATS_INTERVAL_SEC = 1
 
 
 class TaskSetOne(TaskSet):
@@ -46,7 +42,11 @@ class VistHomePageTask(TaskSet):
 
     @task(10)
     def without_login_homepage(self):
-        self.client.get(conf.base_url)
+        response = self.client.get(conf.base_url)
+        try:
+            assert response.elapsed < datetime.timedelta(seconds = 3), "Request took more than 1 second"
+        except:
+            print("request took more than 3secs to load.")
 
 
     @task(5)
@@ -56,14 +56,14 @@ class VistHomePageTask(TaskSet):
             def visiting_api_page(self):
                 response = self.client.get(conf.api_url)
                 print(f"Response status code : {response.status_code}")
-                print(f"Response content : {response.content}")
+                print(f"Response content : {response.headers}")
 
 
             @seq_task(1)
             def user_login(self):
-                res = self.client.post(conf.login_url, {'email' : conf.user_email, "password" : conf.auth_token})
-                print(res.text)
-
+                response = self.client.post(conf.login_url, {'email' : conf.user_email, "password" : conf.auth_token})
+                print(response.status_code)
+                assert response.headers['Connection'] == 'keep-alive', "Unexpected connection header: " + response.headers['Connection']
 
 
 

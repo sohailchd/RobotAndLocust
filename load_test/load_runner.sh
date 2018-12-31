@@ -7,6 +7,10 @@ echo "Setting root dir"
 root_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "root_dir : "$root_dir" "
 
+
+rm $root_dir/reports\*.csv
+rm $root_dir/reports\*.log
+
 export PYTHONPATH=$PYTHONPATH:$root_dir:$root_dir/common:$root_dir/locustfiles:$root_dir/reports
 
 echo "starting locust..."
