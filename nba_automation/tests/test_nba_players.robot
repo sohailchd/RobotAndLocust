@@ -56,7 +56,3 @@ Test player PTS shown before and after applying filters are same, not changed
 
 Test loading time for the stats segment is below specified time limit 
     Verify the loading of the players stats segment is below "4" secs
-
-    ## now refresh the page and verify again
-    Refresh the current page 
-    Verify the loading of the players stats segment is below "4" secs
