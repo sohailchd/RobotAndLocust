@@ -1,4 +1,4 @@
-Toptal Projects
+## Toptal Projects
 
 *   **NBA Automation (nba_automation)** Automates the  https://stats.nba.com/players/traditional/  using robot and selenium
 *   **Football-data org (rest_api)** Tests the API provided by football-data.org
@@ -8,58 +8,76 @@ Toptal Projects
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This project consist of three solutions.  
+* load_test
+* nba_automation
+* rest_api
+
+
+**load_test** 
+
+Load testing script for simulating 1000 users visiting the homepage in 15sec.  
+This solution uses [Locust](https://locust.io/) for simulating the load. Rather than using
+threads, Locust uses coroutines which makes it more scalable to be used from a   
+single machine. Lucust is based in [gevents](http://www.gevent.org/)  
+
+
+
+
+**nba_atomation**  
+
+
+**res_api** : Testing the endpoint API from [FootBall Org](https://www.football-data.org/)   
+
+
 
 ### Prerequisites
+All the solutions can be run on windows and linux (docker suport for linux).    
+For running on **windows** make sure following are installed :  
+1. Latest firefox and chrome browsers.
+2. python3 and pip.
 
-What things you need to install the software and how to install them
+For running on **Ubuntu 18.04** make sure following are installed :  
+1. Latest firefox and chrome browsers.
+2. python3 and pip.
 
+### **Installing python modules**
+For setting up on **windows/ubuntu** follow the below steps :  
 ```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
+> git clone https://git.toptal.com/milorad/basar-sohail-chowdhury.git
+> cd to project root i.e. basar-sohail-chowdhury
+> pip install -r requirements.txt
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+```
+**nba_automation** 
+```
+For windows,
+> nba_automation\execute_tests.bat
+For linux,
 
 ```
-Give an example
+
+**rest_api**
+```
+For running pytest version of tests :
+> rest_api\pytest_api\execute_api.bat    
+
+For running robot version of tests : 
+> rest_api\robot_api\execute_robot_tests.bat 
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
-Currently project is tested on windows only. It can be easily ported to linux with any code change.  
-Next phase involved docker build deployment and CI.
+**Jenkins**
+Project can be easily integrated with Jenkins (CI)
+
+**Docker**
+
 
 
 ## Built With
@@ -75,7 +93,7 @@ Next phase involved docker build deployment and CI.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License.
 
 ## Acknowledgments
 
