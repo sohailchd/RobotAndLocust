@@ -35,6 +35,7 @@ Automation is built using robotframework, python and selenium. Tests can be exec
                 ├── res_files                    # keyword resoucres    
                 ├── tests                        # Actual tests  
                 ├── utilities                    # framework utilities, BrowserManager and Custom robot listeners   
+                   └── drivers                   # contains win,linux driver for firerefox and chrome
                 └── conf.py                      # global vars     
                 └── execute_tests.bat            # windows test runner     
                 └── robot_runner.sh              # linux test runner   
@@ -85,7 +86,7 @@ For setting up on **windows/ubuntu** follow the below steps :
 
 
 
-## Running the tests
+# Running the tests
 
 ### **load_test**
 For windows:
@@ -100,16 +101,31 @@ For Linux:
 
 
 ### **nba_automation**
-
-For windows:
+**For windows:**
 > 
-    $ nba_automation\execute_tests.bat    
+    $ nba_automation\execute_tests.bat               ## Please find all the reports in the "nba_automation/reports"
+    
+    If you want to run particular test cases, add robot tag.   
+        Step 1: Add tag to test case  
+            Test loading time for the stats segment is below specified time limit 
+                [tags]     wip
+                Verify the loading of the players stats segment is below "4" secs
+        Step 2: Run the command with tag name
+            $ nba_automation\execute_tests.bat wip
+
+    *Note : for windows we have to manually privide the chromedriver.exe and geckodriver.exe in the 
+    utilities\drivers\wins folder. Make sure drivers are named as mentioned. 
 
 
-For Linux :
+Download [ChromeDriver](https://chromedriver.storage.googleapis.com/index.html?path=2.45/)  
+Download [geckodriver 64bit](https://github.com/mozilla/geckodriver/releases)
+
+
+**For Linux :**
 >  
-    $ nba_automation\robot_runner.sh    
+    $ nba_automation\robot_runner.sh                  ## Please find all the reports in the "nba_automation/reports"
 
+    **shell script will download the drivers automatically.
 
 **rest_api**  
 Windows:
@@ -127,18 +143,23 @@ Linux:
 
 
 ## Deployment
-
-**Jenkins**
-All the windows version jobs has been ported on Jenkins.  
+     
+**Jenkins**    
+All the windows version of script has been ported on Jenkins.  
 Please find the jobs configuration files in the 'jenkins_jobs' folder. 
 You have to import the jobs in your Jenkins server. 
 
 > 
     1. Make sure 'Test Result Analyzer' and 'Robot Results' plugins are installed in Jenkins.
-    2. All the jobs are parameterized with "root_dir". Please sepecify the root of the test project.   
+    2. All the jobs are parameterized with "root_dir". Please sepecify the root of the test project.      
     For more information please drop me an email at sohail.chd0202@gmail.com.    
- 
-## Docker
+
+
+
+# Docker  
+
+All the three projects can be run on docker. Project has been tested on Ubuntu 18.04.  
+
 
 **load_test**  
 >
@@ -146,7 +167,7 @@ You have to import the jobs in your Jenkins server.
     $ sudo docker build . -t load_test
     $ sudo docker run -v ${PWD}/reports:/usr/src/app/reports -entrypoint="/bin/bash" -i load_test
 
-    Pleas find the reports in 'reports folder'. You should be able to see logs in the console.
+    Please find the reports in 'reports folder'. You should be able to see logs in the console.
 
 **rest_api**
 
@@ -155,8 +176,16 @@ You have to import the jobs in your Jenkins server.
     $ sudo docker build . -t rest_api_pytest
     $ sudo docker run -v ${PWD}/pytest_api/py_reports:/usr/src/pytest_api/py_reports -entrypoint="/bin/bash" -i rest_api_pytest
 
+**nba_automation**
+>
+    $ cd basar-sohail-chowdhury/nba_automation
+    $ sudo docker build . -t nba_test
+    $ sudo docker run -v ${PWD}/reports:/usr/src/app/reports  -entrypoint="/bin/bash" -i nba_test  headless
 
-
+    ## Please find all the reports in the "nba_automation/reports" of the host system.  
+    
+    *Note:  Only chrome browser has been tested in docker, for using firefox change the test_setup.json   
+        build the image and run.
 
 
 ## Built With
@@ -164,7 +193,7 @@ You have to import the jobs in your Jenkins server.
 * [Robotframework](http://robotframework.org/) - The BDD framework
 * [Requests](http://docs.python-requests.org/en/master/) - HTTP library
 * [Selenium](https://www.seleniumhq.org/) - Browser automation framework
-
+* [Locust](https://locust.io/)
 
 ## Authors
 
@@ -178,4 +207,4 @@ This project is licensed under the MIT License.
 
 * Toptal
 * NBA stats
-* football-data.org
+* football-dataorg

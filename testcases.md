@@ -50,20 +50,47 @@ There 3 different sections of the website covered by the automation.
 **- Player stats page**
 >
     1. Test player PTS are shown and not empty for specific teams (without appying any filters)  
-    2. Test players PTS are shown and not empty for specific teams after appying advance filter     
-    3. Test player PTS shown before and after applying filters are same, not changed
-    4. Test loading time for the stats segment is below specified time limit 
+                - Go to https://stats.nba.com/players/traditional
+                - Verify if PTS for players is not empty, doesn't have any special character and only numbers/decimal   
+
+    2. Test players PTS are shown and not empty for specific teams after appying advance filter       
+                -  Go to https://stats.nba.com/players/traditional    
+                -  Now apply advance filter from the right corner in the table and choose team.       
+                -  When the stats table updates and shows only player stats from a specific team    
+                   verify if PTS for players is not empty, doesn't have any special character and only numbers/decimal       
+
+    3. Test player PTS shown before and after applying filters are same, not changed   
+                - Now verify if the stats matches and are same in above cases.   
+
+    4. Test loading time for the stats segment is below specified time limit    
+                - We try to verify if the stats table laods wihin specffic time    
+
+> Bugs:  
+    1. Test player PTS shown before and after applying filters are same, not changed      
+                 - "Player PTS differ for HOU"  , Following keys have different values: Key Austin Rivers: 7.5 != 10.0   
+
+    2. Test loading time for the stats segment is below specified time limit     # [FAILS] intermittent
 
 
 **- Leaders stats**
 > 
-    1. Verify stats of the top 3 players matches stats on particular player page
+    1. Verify stats of the top 3 players matches stats on particular player page    
+                - Go to leader board    
+                - Compile all the player stats from the leader board page (http://stats.nba.com/leaders/)     
+                - Now find the top three players with hightest PTS     
+                - Individually go each player page by clicking on the player name     
+                - Now verify if (points per game, assists per game, rebounds per game) are consistent with 
+                  stats on leader board page.    
   
 
 **- Team Standings**
 >
     1.  Verify both the conference are shown and consists of 15 teams each 
-
+                - Verify if the NBA Stats page shows table with both the conference EAST and WEST    
+                - Verify if the NBA Stats page shows consistent conference with each having 15 teams    
+                - Verify win percentage of each team is correct as per their wins and losses proportions   win%==(win)/total_mathces  
+                - Verify overall wins should be equal to sum of wins in home and road colums     
+                - Verify overall losses should be equal to sum of losses in home and road columns      
 
 
 ## **rest_api**
