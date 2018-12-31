@@ -32,4 +32,5 @@ RUN rm /chrome.deb
 
 
 RUN ["chmod", "+x","/usr/src/app/robot_runner.sh"]
-CMD ["/usr/src/app/robot_runner.sh"]
+ENTRYPOINT ["/usr/src/app/robot_runner.sh"]
+CMD []

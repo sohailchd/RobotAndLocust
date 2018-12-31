@@ -33,14 +33,15 @@ fi
 echo "geckodriver setup done. "
 chmod 777 $geckod
 
+if [ "$1" == "headless" ] 
+        then
+        echo "headless mode provides. starting xvfb server for docker"
+        echo "starting xvfb server for display"
+        Xvfb :99 -screen 0 1920x1080x16 &
+        export DISPLAY=:99.0
+        echo "xvfb started successfylly..."
+fi
 
-# read -p "Press enter to continue"
-
-
-# echo "starting xvfb server for display"
-# Xvfb :99 -screen 0 1920x1080x16 &
-# export DISPLAY=:99.0
-# echo "xvfb started successfylly..."
 
 
 rm -f $root_dir/reports/failed_screenshots/*.png
@@ -52,7 +53,16 @@ rm -f $root_dir/reports/*.html
 
 export PYTHONPATH=$PYTHONPATH:$root_dir:$root_dir/locators:$root_dir/tests:/$root_dir/page_objects:$root_dir/reports:$root_dir/utilities:$root_dir/res_files
 
-python -m robot.run   --outputdir=$root_dir/reports  --listener=$root_dir/utilities/CustomListener.py    \
-$root_dir/tests/test_nba_leaders.robot  \
-$root_dir/tests/test_nba_players.robot   \
-$root_dir/tests/test_nba_standings.robot  \
+if [ "$1" == "wip" ]; then
+    echo "running custom tag : "
+    python -m robot.run  --include="$1"  --outputdir=$root_dir/reports  --listener=$root_dir/utilities/CustomListener.py    \
+    $root_dir/tests/test_nba_leaders.robot  \
+    $root_dir/tests/test_nba_players.robot   \
+    $root_dir/tests/test_nba_standings.robot 
+else 
+    echo "running all the tags : "
+    python -m robot.run  --outputdir=$root_dir/reports  --listener=$root_dir/utilities/CustomListener.py    \
+    $root_dir/tests/test_nba_leaders.robot  \
+    $root_dir/tests/test_nba_players.robot   \
+    $root_dir/tests/test_nba_standings.robot 
+fi
