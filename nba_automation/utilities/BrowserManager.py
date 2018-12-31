@@ -1,26 +1,21 @@
 import json
 import os
 from time import sleep
-
 import robot
+import conf
+import sys
+
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
-import conf
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
 
 
 present_dir = conf.present_dir
 print(f"present_dir : {present_dir}")
-if os.name == 'nt':
-    print("platform : WIN")
-    firefox_driver_path = os.path.join(present_dir,'utilities/drivers/win/geckodriver.exe')
-    chrome_driver_path = os.path.join(present_dir,'utilities/drivers/win/chromedriver.exe')  ## path to the chrome driver
-elif os.name == 'posix':
-    print("platform : LINUX")
-    firefox_driver_path = os.path.join(present_dir,'utilities/drivers/linux/geckodriver')
-    chrome_driver_path = os.path.join(present_dir,'utilities/drivers/linux/chromedriver')
-
 safari_driver_path = ""  ## path to the safari driver
 
 
@@ -71,14 +66,25 @@ class BrowserManager():
                     '''
                         initialises firefox browser
                     '''
-                    print(f" firefox : {firefox_driver_path}\n")
-                    cls.driver = webdriver.Firefox(executable_path=firefox_driver_path) 
-                    print(f"driver session id :  {cls.driver.session_id}")
-                    ## implicit wait for 15secs
-                    cls.driver.implicitly_wait(conf.IMPLICIT_WAIT)
-                    cls.driver.maximize_window()
-                    cls.driver.get(base_url)
-                    sleep(3)
+
+                    try:
+                        print(f" firefox : {conf.firefox_driver_path}\n")
+                        cls.driver = webdriver.Firefox(executable_path=conf.firefox_driver_path) 
+                        print(f"driver session id :  {cls.driver.session_id}")
+                        ## implicit wait for 15secs
+                        cls.driver.implicitly_wait(conf.IMPLICIT_WAIT)
+                        cls.driver.maximize_window()
+                        
+                        if conf.MODE.upper() == "HEADLESS":
+                            cls.driver.set_window_position(0, 0)
+                            cls.driver.set_window_size(*conf.DEFAULT_WINDOW_SIZE)
+
+                        cls.driver.get(base_url)
+                        sleep(3)
+                    except Exception as e:
+                        print(f"browser initialization failed with error : {e}")
+                        sys.exit
+
                     return cls.driver
 
 
@@ -88,23 +94,34 @@ class BrowserManager():
                     '''
                         Initialises the chrome driver
                     '''
-                    print(f" chrome : {chrome_driver_path}\n")
-                    chrome_options = Options()
-                    if conf.MODE.upper() == 'HEADLESS':
-                        chrome_options.add_argument('--headless')
-                        chrome_options.add_argument('--no-sandbox')
-                        chrome_options.add_argument("--disable-gpu")
+                    print(f" chrome : {conf.chrome_driver_path}\n")
+                    try:
+                        chrome_options = Options()
+                        if conf.MODE.upper() == 'HEADLESS':
+                            chrome_options.add_argument('--headless')
+                            chrome_options.add_argument('--no-sandbox')
+                            chrome_options.add_argument("--disable-gpu")
 
-                    chrome_options.add_argument("--disable-extensions")
-                    chrome_options.add_argument("disable-infobars")
-                    
-                    cls.driver = webdriver.Chrome(executable_path=chrome_driver_path,chrome_options=chrome_options) 
-                    print(f"driver session id :  {cls.driver.session_id}")
-                    ## implicit wait for 15secs
-                    cls.driver.implicitly_wait(conf.IMPLICIT_WAIT)
-                    cls.driver.maximize_window()
-                    cls.driver.get(base_url)
-                    sleep(3)
+                        chrome_options.add_argument("--disable-extensions")
+                        chrome_options.add_argument("disable-infobars")
+                        
+                        cls.driver = webdriver.Chrome(executable_path=conf.chrome_driver_path,chrome_options=chrome_options) 
+                        print(f"driver session id :  {cls.driver.session_id}")
+                        ## implicit wait for 15secs
+                        cls.driver.implicitly_wait(conf.IMPLICIT_WAIT)
+
+                        if conf.MODE.upper() == "HEADLESS":
+                            cls.driver.set_window_position(0, 0)
+                            cls.driver.set_window_size(*conf.DEFAULT_WINDOW_SIZE)
+
+
+                        cls.driver.maximize_window()
+                        cls.driver.get(base_url)
+                        sleep(3)
+                    except Exception as e:
+                        print(f"Browser initialization failed with error : {e}")
+                        sys.exit 
+
                     return cls.driver
 
 

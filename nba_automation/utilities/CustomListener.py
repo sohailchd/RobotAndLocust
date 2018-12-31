@@ -18,6 +18,8 @@ class CustomListener(object):
 
     def start_suite(self,data, suite):
         print("start_suite listener called...")
+        if not BrowserManager.get_browser():
+            BrowserManager.initialize_browser()
         
 
 

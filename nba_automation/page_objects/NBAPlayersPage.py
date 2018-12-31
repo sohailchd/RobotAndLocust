@@ -131,19 +131,24 @@ class NBAPlayersPage(BasePage):
         driver.find_element(*NBAPlayersLocators.advance_filter).click()
 
 
-    def verify_STATS_loading_time_within_specified(self,wait_time=1,segment=None):
+    def verify_STATS_loading_time_within_specified(self,wait_time=4,segment=None):
         '''
             params: time (str)
-            verifies if the loading time is withing specified time limit
+            verifies if the loading time is withinn specified time limit
         '''
-        start = time.time()
-        ## navigate to the players stats page 
-        driver.get(self.page_url)
+        try :
+                custom_browser = CustomUtils.custom_browser_for_load_verifier(self.page_url) 
+                start = time.time()
+                ## navigate to the players stats page 
+                custom_browser.get(self.page_url)
 
-        ## wait for stats table to load in the DOM 
-        self.explicit_wait(NBAPlayersLocators.stats_table,is_visible=True)
-        end = time.time()
-        print(f" total time in secs : {end-start}")
-        assert float(end-start) < float(wait_time)  ,  ("Loading time exceeded for the stats table on players page.")
-
-    
+                ## wait for stats table to load in the DOM 
+                self.explicit_wait(NBAPlayersLocators.stats_table,is_visible=True,driver=custom_browser) 
+                end = time.time()
+                print(f" total time in secs : {end-start}")
+                assert float(end-start) < float(wait_time)  ,  ("Loading time exceeded for the stats table on players page.")
+                custom_browser.close()
+        except Exception as e:
+                print(f"")
+                custom_browser.close()
+                raise AssertionError(f"assertion error : {e}")
