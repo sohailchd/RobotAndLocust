@@ -26,18 +26,21 @@ class BasePage():
         return self.page_url
         
     
-    def explicit_wait(self,locator,time=20,is_visible=False):
+    def explicit_wait(self,locator,time=20,is_visible=False,driver=None):
         ''' 
            custom wait for given element
         '''
+
+        if not driver:
+            driver = self._driver
        
         print(f"locator : {locator}")
         if not is_visible:
-            target = WebDriverWait(self._driver,time).until(
+            target = WebDriverWait(driver,time).until(
                 EC.presence_of_element_located(locator)
             )
         else:
-            target = WebDriverWait(self._driver,time).until(
+            target = WebDriverWait(driver,time).until(
                 EC.visibility_of_element_located(locator)
             )
         print(f"exlicit wait, found element {target} ")

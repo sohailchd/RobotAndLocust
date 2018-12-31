@@ -1,4 +1,8 @@
 set root_dir=%~dp0
+set tag=%1
+
+@echo off 
+
 echo "Starting nba_automation, make sure you have installed drivers for firefox and chrome"
 echo "For choosing browser, change the settings at 'test_setup.json file'"
 
@@ -11,9 +15,16 @@ del %root_dir%reports\*.html
 set PYTHONPATH=%PYTHONPATH%;%root_dir%;%root_dir%\locators;%root_dir%\res_files;%root_dir%\page_objects;^
 %root_dir%\utilities;%root_dir%\utilities\drivers;%root_dir%\tests;%root_dir%test_setup.json;%root_dir%\conf.py
 
+if "%~1"=="" (
 
-C:\python\python.exe -m robot.run   --outputdir=%root_dir%reports  --listener=%root_dir%utilities\CustomListener.py    ^
-%root_dir%tests\test_nba_leaders.robot   ^
-%root_dir%tests\test_nba_players.robot   ^
-%root_dir%tests\test_nba_standings.robot 
+    C:\python\python.exe -m robot.run   --outputdir=%root_dir%reports  --listener=%root_dir%utilities\CustomListener.py    ^
+    %root_dir%tests\test_nba_leaders.robot   ^
+    %root_dir%tests\test_nba_players.robot   ^
+    %root_dir%tests\test_nba_standings.robot 
  
+ ) else (
+    C:\python\python.exe -m robot.run  --include=%tag%  --outputdir=%root_dir%reports  --listener=%root_dir%utilities\CustomListener.py    ^
+    %root_dir%tests\test_nba_leaders.robot   ^
+    %root_dir%tests\test_nba_players.robot   ^
+    %root_dir%tests\test_nba_standings.robot
+)
