@@ -50,9 +50,8 @@ There 3 different sections of the website covered by the automation.
 **- Player stats page**
 >
     1. Test player PTS are shown and not empty for specific teams (without appying any filters)  
-                - Go to https://stats.nba.com/players/traditional
+                - Go to https://stats.nba.com/players/traditional  
                 - Verify if PTS for players is not empty, doesn't have any special character and only numbers/decimal   
-
     2. Test players PTS are shown and not empty for specific teams after appying advance filter       
                 -  Go to https://stats.nba.com/players/traditional    
                 -  Now apply advance filter from the right corner in the table and choose team.       
