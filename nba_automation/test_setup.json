@@ -2,6 +2,7 @@
         "test_configurations" : {
             "browser" : "CHROME",
             "suite_tags" : "all",
-            "base_url" : "https://stats.nba.com"
+            "base_url" : "https://stats.nba.com",
+            "mode" : "normal"
         }
 }

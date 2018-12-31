@@ -11,10 +11,13 @@ from selenium.webdriver.chrome.options import Options
 
 
 present_dir = conf.present_dir
+print(f"present_dir : {present_dir}")
 if os.name == 'nt':
+    print("platform : WIN")
     firefox_driver_path = os.path.join(present_dir,'utilities/drivers/win/geckodriver.exe')
     chrome_driver_path = os.path.join(present_dir,'utilities/drivers/win/chromedriver.exe')  ## path to the chrome driver
-if os.name == 'posix':
+elif os.name == 'posix':
+    print("platform : LINUX")
     firefox_driver_path = os.path.join(present_dir,'utilities/drivers/linux/geckodriver')
     chrome_driver_path = os.path.join(present_dir,'utilities/drivers/linux/chromedriver')
 
@@ -68,7 +71,7 @@ class BrowserManager():
                     '''
                         initialises firefox browser
                     '''
-                    print(firefox_driver_path)
+                    print(f" firefox : {firefox_driver_path}\n")
                     cls.driver = webdriver.Firefox(executable_path=firefox_driver_path) 
                     print(f"driver session id :  {cls.driver.session_id}")
                     ## implicit wait for 15secs
@@ -85,10 +88,16 @@ class BrowserManager():
                     '''
                         Initialises the chrome driver
                     '''
-                    print(chrome_driver_path)
+                    print(f" chrome : {chrome_driver_path}\n")
                     chrome_options = Options()
+                    if conf.MODE.upper() == 'HEADLESS':
+                        chrome_options.add_argument('--headless')
+                        chrome_options.add_argument('--no-sandbox')
+                        chrome_options.add_argument("--disable-gpu")
+
                     chrome_options.add_argument("--disable-extensions")
                     chrome_options.add_argument("disable-infobars")
+                    
                     cls.driver = webdriver.Chrome(executable_path=chrome_driver_path,chrome_options=chrome_options) 
                     print(f"driver session id :  {cls.driver.session_id}")
                     ## implicit wait for 15secs

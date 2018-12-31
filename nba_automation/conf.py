@@ -16,3 +16,4 @@ base_url = settings['base_url']
 default_browser = settings['browser']
 
 IMPLICIT_WAIT = 15
+MODE = settings['mode']
