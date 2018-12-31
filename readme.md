@@ -79,50 +79,51 @@ For running on **Ubuntu 18.04** make sure following are installed :
 
 ## **Installing python modules**
 For setting up on **windows/ubuntu** follow the below steps :  
-```
-> git clone https://git.toptal.com/milorad/basar-sohail-chowdhury.git
-> cd basar-sohail-chowdhury
-> pip install -r requirements.txt
-```
+>
+    $ git clone https://git.toptal.com/milorad/basar-sohail-chowdhury.git     
+    $ cd basar-sohail-chowdhury     
+    $ pip install -r requirements.txt     
+
 
 
 ## Running the tests
 
 **load_test**
 For windows:
-```
-> load_test\loadRunner.bat
-```
-For Linux:
-```
-> load_test\load_runner.sh
-```
+>    
+    $ load_test\loadRunner.bat   
+
+    
+For Linux:  
+>    
+    $ load_test\load_runner.sh  
+
 
 
 **nba_automation**
 
 For windows:
-```
-> nba_automation\execute_tests.bat    
-```
+> 
+    $ nba_automation\execute_tests.bat    
+
 
 For Linux :
-```    
-> nba_automation\robot_runner.sh    
-```
+>  
+    $ nba_automation\robot_runner.sh    
+
 
 **rest_api**
 Windows:
-```
-> rest_api\pytest_api\execute_api.bat    
-> rest_api\robot_api\execute_robot_tests.bat 
-```
+> 
+    $ rest_api\pytest_api\execute_api.bat    
+    $ rest_api\robot_api\execute_robot_tests.bat 
+
 
 Linux:
-```
-> rest_api\pytest_api\execute_api.sh      
-> rest_api\robot_api\execute_robot_tests.sh 
-```
+> 
+    $ rest_api\pytest_api\execute_api.sh      
+    $ rest_api\robot_api\execute_robot_tests.sh 
+
 
 
 ## Deployment
