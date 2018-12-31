@@ -3,20 +3,51 @@
 
 ## **load_test**
 
-Test decribes following user behaviour and creates 1000 clients requests within 15secs.  
+
+
+**Reports**     
+a) Explain the test in details    
 >
+    Test decribes following user behaviour and creates 1000 clients requests within 15secs.      
+    These steps are done sequentially by each user.   
+
     Step 1. User goes to homepage https://www.football-data.org/  
     Step 2. User signin (https://www.football-data.org/client/login) using email and auth-token    
     Step 3. User visits the api documentation at https://www.football-data.org/documentation/api    
 
-These steps are done sequentially by each user.
+Since Locust uses gevents (coroutine based lib for N/W), we can scale the user to large 
+numbers compared to threads on a single machine.   
+We can even setup distributed clients for simulating the load.
+
+
+b) Did the load test have an impact on web application response time?      
+> 
+    Yes, load have an impact on the website. Average response time suffered.     
+    More than 300 request took more than 3secs out of approx 1200 request.     
+    All the reports are kept in  "load_test\reports_final\"
+
+c) What is the optimal application response time for modern day web applications?   
+> 
+    It is all about perception and human psychology. Even the screen we are staring is not         
+    continuous which flickers at 30 Hz or may be 60Hz. Anything which have have a response time above 1/10 sec can    
+    be perceived by normal humans. In the age of internet and instant gratification anything which lags by     
+    even 1sec is huge deal. For an web application to be usable by people should take into consideratiion 
+    of the target audience and type of the service offered.   
+
+    I feel anything which have response time of more than 3secs or 4sec affects the user experience.  
+
+d) Analyze few HTTP/S responses
+>
+    - Please find the HTTP logs in "load_test\reports_final\locust_log.log" 
+    - Please find the "load_test\reports_final\response.png" for graph 
+      showing inscrease in response time with increase in users visiting the site.
 
 
 
 ## **nba_automation**
 There 3 different sections of the website covered by the automation.
 
-**Player stats page**
+**- Player stats page**
 >
     1. Test player PTS are shown and not empty for specific teams (without appying any filters)  
     2. Test players PTS are shown and not empty for specific teams after appying advance filter     
@@ -24,12 +55,12 @@ There 3 different sections of the website covered by the automation.
     4. Test loading time for the stats segment is below specified time limit 
 
 
-**Leaders stats**
+**- Leaders stats**
 > 
     1. Verify stats of the top 3 players matches stats on particular player page
   
 
-**Team Standings**
+**- Team Standings**
 >
     1.  Verify both the conference are shown and consists of 15 teams each 
 

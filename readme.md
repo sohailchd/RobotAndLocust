@@ -53,8 +53,7 @@ There are 2 different verions of the same tests as mentioned below.
                     ..
                     ├── execute_api.bat          # runs the tests on windows     
                     ├── pytest_api.sh            # runs the tests on linux    
-                    ├── test_pytest.py           # actual tests    
-
+                    ├── test_pytest.py           # actual tests      
                 ├── robot_api                    # robot version of tests (5 tests, can be easily extend to cover more)      
                     ├── res                      # res files for data driver keyword    
                     ├── robot_reports            # final report   
@@ -88,7 +87,7 @@ For setting up on **windows/ubuntu** follow the below steps :
 
 ## Running the tests
 
-**load_test**
+### **load_test**
 For windows:
 >    
     $ load_test\loadRunner.bat   
@@ -100,7 +99,7 @@ For Linux:
 
 
 
-**nba_automation**
+### **nba_automation**
 
 For windows:
 > 
