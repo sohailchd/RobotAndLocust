@@ -55,7 +55,6 @@ There are 2 different verions of the same tests as mentioned below.
                     ├── pytest_api.sh            # runs the tests on linux    
                     ├── test_pytest.py           # actual tests    
 
-
                 ├── robot_api                    # robot version of tests (5 tests, can be easily extend to cover more)      
                     ├── res                      # res files for data driver keyword    
                     ├── robot_reports            # final report   
@@ -63,6 +62,7 @@ There are 2 different verions of the same tests as mentioned below.
                     ├── test                     # actual tests   
                     ├── execute....bat           # command to execute tests in windows    
                     ├── robot.....sh             # command to execute tests in linux   
+
 
 
 
@@ -112,12 +112,14 @@ For Linux :
 ```
 
 **rest_api**
+Windows:
 ```
-Windows (pytest):
 > rest_api\pytest_api\execute_api.bat    
 > rest_api\robot_api\execute_robot_tests.bat 
+```
 
 Linux:
+```
 > rest_api\pytest_api\execute_api.sh      
 > rest_api\robot_api\execute_robot_tests.sh 
 ```
