@@ -91,12 +91,21 @@ For setting up on **windows/ubuntu** follow the below steps :
 ### **load_test**
 For windows:
 >    
-    $ load_test\loadRunner.bat   
+    $ load_test\loadRunner.bat                    ## Please find all the reports in the "reports" folder
 
     
 For Linux:  
 >    
-    $ load_test\load_runner.sh  
+    $ load_test\load_runner.sh                    ## Please find all the reports in the "reports"
+
+    Note: 
+    - 1. reports_final conatains reports from from test run by me.
+    - 2. You can change the number of users by changing batch script. Change the '-c' and '-r' value  
+        c= number of users
+        r= users created per sec from locust
+        
+
+
 
 
 

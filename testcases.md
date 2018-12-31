@@ -13,11 +13,13 @@ a) Explain the test in details
 
     Step 1. User goes to homepage https://www.football-data.org/  
     Step 2. User signin (https://www.football-data.org/client/login) using email and auth-token    
-    Step 3. User visits the api documentation at https://www.football-data.org/documentation/api    
+    Step 3. User visits the api documentation at https://www.football-data.org/documentation/api   
+    . 
+    Since Locust uses gevents (coroutine based lib for N/W), we can scale the user to large    
+    numbers compared to threads on a single machine.       
+    We can even setup distributed clients for simulating the load.    
 
-Since Locust uses gevents (coroutine based lib for N/W), we can scale the user to large 
-numbers compared to threads on a single machine.   
-We can even setup distributed clients for simulating the load.
+    - No. of requests taking more than 3 sec = 316 (locust_log.log)
 
 
 b) Did the load test have an impact on web application response time?      
@@ -65,7 +67,7 @@ There 3 different sections of the website covered by the automation.
 > 
     Bugs:  
         1. Test player PTS shown before and after applying filters are same, not changed      
-                    - "Player PTS differ for HOU"  , Following keys have different values: Key Austin Rivers: 7.5 != 10.0  
+                    - "Player PTS differ for HOU"  , Following keys have different values: Key Austin Rivers: 7.5 != 10.0
         2. Test loading time for the stats segment is below specified time limit     # [FAILS] intermittent
 
 
