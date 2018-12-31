@@ -17,10 +17,10 @@ This project consist of three solutions.
 
 **load_test** 
 
-Load testing script for simulating 1000 users visiting the homepage in 15sec.  
-This solution uses [Locust](https://locust.io/) for simulating the load. Rather than using
-threads, Locust uses coroutines which makes it more scalable to be used from a   
-single machine. Lucust is based in [gevents](http://www.gevent.org/)  
+Load testing script for simulating 1000 users visiting the homepage in 15sec.      
+This solution uses [Locust](https://locust.io/) for simulating the load. Rather than using      
+threads, Locust uses coroutines which makes it more scalable to be used from a      
+single machine. Lucust is based on [gevents](http://www.gevent.org/)      
 
 
 
@@ -103,7 +103,7 @@ For Linux:
     - 2. You can change the number of users by changing batch script. Change the '-c' and '-r' value  
         c= number of users
         r= users created per sec from locust
-        
+
 
 
 
