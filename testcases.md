@@ -57,10 +57,8 @@ There 3 different sections of the website covered by the automation.
                 -  Now apply advance filter from the right corner in the table and choose team.       
                 -  When the stats table updates and shows only player stats from a specific team    
                    verify if PTS for players is not empty, doesn't have any special character and only numbers/decimal       
-
     3. Test player PTS shown before and after applying filters are same, not changed   
                 - Now verify if the stats matches and are same in above cases.   
-
     4. Test loading time for the stats segment is below specified time limit    
                 - We try to verify if the stats table laods wihin specffic time    
 
@@ -104,3 +102,18 @@ There 3 different sections of the website covered by the automation.
     5. Get redirection with multiple res, expected_response_code==301
 
 **Pytest version : 10 Test cases**
+>
+    -Competitions   
+        1. test_get_competitions      
+        2. test_get_competitions_with_filter_plan      
+        3. test_particular_competition      
+        4. test_get_competitions_wrong_uri   
+
+    -Teams   
+        1. test_list_team_for_competition_id   
+        2. test_list_team_competition_id    
+    -Matches   
+        1. test_upcomming_matches_without_auth   
+        2. test_upcomming_matches   
+        3. test_match_across_competitions_with_wrong_uri   
+        4. test_redirection_with_multiple_res    

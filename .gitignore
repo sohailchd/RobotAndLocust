@@ -118,3 +118,8 @@ assets/
 
 *.html
 output.xml 
+
+chromedriver.exe 
+geckodriver.exe 
+chromedriver 
+geckodriver 
