@@ -1,0 +1,74 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>load test</description>
+  <displayName>root</displayName>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>root_dir</name>
+          <description>root dir for project</description>
+          <defaultValue>C:\Users\sohai\OneDrive\Desktop\scripts\toptal\basar-sohail-chowdhury\load_test</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>${root_dir}</customWorkspace>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>cd %root_dir%&#xd;
+loadRunner.bat</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>reports\*</artifacts>
+      <allowEmptyArchive>false</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+      <caseSensitive>true</caseSensitive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.plot.PlotPublisher plugin="plot@2.1.0">
+      <plots>
+        <hudson.plugins.plot.Plot>
+          <title>Locust HTTPS requests</title>
+          <yaxis></yaxis>
+          <series>
+            <hudson.plugins.plot.CSVSeries>
+              <file>reports\*.csv</file>
+              <label></label>
+              <fileType>csv</fileType>
+              <inclusionFlag>OFF</inclusionFlag>
+              <exclusionValues></exclusionValues>
+              <url></url>
+              <displayTableFlag>true</displayTableFlag>
+            </hudson.plugins.plot.CSVSeries>
+          </series>
+          <group>Distribution</group>
+          <numBuilds></numBuilds>
+          <csvFileName>plot-2855621556652998765.csv</csvFileName>
+          <csvLastModification>0</csvLastModification>
+          <style>bar</style>
+          <useDescr>false</useDescr>
+          <keepRecords>false</keepRecords>
+          <exclZero>false</exclZero>
+          <logarithmic>false</logarithmic>
+          <yaxisMinimum></yaxisMinimum>
+          <yaxisMaximum></yaxisMaximum>
+        </hudson.plugins.plot.Plot>
+      </plots>
+    </hudson.plugins.plot.PlotPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>

@@ -1,0 +1,65 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>nba_automation &#xd;
+run the robot suites</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>root_dir</name>
+          <description>root folder</description>
+          <defaultValue>C:\Users\sohai\OneDrive\Desktop\scripts\toptal\basar-sohail-chowdhury\nba_automation</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>target_suite</name>
+          <description>tags to run</description>
+          <defaultValue>all</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>${root_dir}</customWorkspace>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>cd %root_dir%&#xd;
+execute_tests.bat&#xd;
+</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>reports</artifacts>
+      <allowEmptyArchive>false</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+      <caseSensitive>true</caseSensitive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.robot.RobotPublisher plugin="robot@1.6.5">
+      <outputPath>\reports</outputPath>
+      <reportFileName>*.html</reportFileName>
+      <logFileName>*.html</logFileName>
+      <outputFileName>*.xml</outputFileName>
+      <disableArchiveOutput>false</disableArchiveOutput>
+      <passThreshold>0.0</passThreshold>
+      <unstableThreshold>0.0</unstableThreshold>
+      <otherFiles>
+        <string></string>
+      </otherFiles>
+      <enableCache>true</enableCache>
+      <onlyCritical>true</onlyCritical>
+    </hudson.plugins.robot.RobotPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>
