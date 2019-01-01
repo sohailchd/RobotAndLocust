@@ -183,7 +183,7 @@ All the three projects can be run on docker. Project has been tested on Ubuntu 1
 > 
     $ cd basar-sohail-chowdhury/rest_api
     $ sudo docker build . -t rest_api_pytest
-    $ sudo docker run -v ${PWD}/pytest_api/py_reports:/usr/src/pytest_api/py_reports -entrypoint="/bin/bash" -i rest_api_pytest
+    $ sudo docker run -v ${PWD}/pytest_api/py_reports:/usr/src/rest_api/pytest_api/py_reports -entrypoint="/bin/bash" -i rest_api_pytest
 
 **nba_automation**
 >
