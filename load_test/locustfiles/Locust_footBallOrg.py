@@ -4,7 +4,7 @@ import sys, os
 sys.path.append(os.getcwd())
 from common import conf 
 import locust.stats
-
+import datetime
 
 class TaskSetOne(TaskSet):
     '''
@@ -56,13 +56,13 @@ class VistHomePageTask(TaskSet):
             def visiting_api_page(self):
                 response = self.client.get(conf.api_url)
                 print(f"Response status code : {response.status_code}")
-                print(f"Response content : {response.headers}")
+                print(f"Response header : {response.headers}")
 
 
             @seq_task(1)
             def user_login(self):
                 response = self.client.post(conf.login_url, {'email' : conf.user_email, "password" : conf.auth_token})
-                print(response.status_code)
+                print(f"login response status code : {response.status_code}")
                 assert response.headers['Connection'] == 'keep-alive', "Unexpected connection header: " + response.headers['Connection']
 
 

@@ -174,7 +174,7 @@ All the three projects can be run on docker. Project has been tested on Ubuntu 1
 >
     $ cd basar-sohail-chowdhury/load_test
     $ sudo docker build . -t load_test
-    $ sudo docker run -v ${PWD}/reports:/usr/src/app/reports -entrypoint="/bin/bash" -i load_test
+    $ sudo docker run -v ${PWD}/reports:/usr/src/load_test/reports -entrypoint="/bin/bash" -i load_test
 
     Please find the reports in 'reports folder'. You should be able to see logs in the console.
 
