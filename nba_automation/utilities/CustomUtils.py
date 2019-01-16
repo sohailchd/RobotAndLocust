@@ -101,7 +101,7 @@ class CustomUtils():
                         chrome_options.add_argument("--disable-extensions")
                         chrome_options.add_argument("disable-infobars")
                         cap = DesiredCapabilities.CHROME
-                        cap['pageLoadStrategy'] = "eager"
+                        # cap['pageLoadStrategy'] = "eager"
 
                         driver = webdriver.Chrome(executable_path=conf.chrome_driver_path,
                                 chrome_options=chrome_options,desired_capabilities=cap) 

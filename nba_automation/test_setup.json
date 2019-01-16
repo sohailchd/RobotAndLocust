@@ -1,8 +1,8 @@
 {
         "test_configurations" : {
-            "browser" : "CHROME",
+            "browser" : "FIREFOX",
             "suite_tags" : "all",
             "base_url" : "https://stats.nba.com",
-            "mode" : "normal"
+            "mode" : "headless"
         }
 }

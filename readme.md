@@ -1,10 +1,10 @@
-# Toptal Projects 
+# Projects 
 
 *   **NBA Automation (nba_automation)** Automates the  https://stats.nba.com/players/traditional/ 
 *   **Football-data org (rest_api)** Tests the API provided by football-data.org
 *   **Load Testing (load_test)** Load test on the hompage of on homepage of football-data.org
 
-Link to all the implemeted test cases [Tests](https://git.toptal.com/milorad/basar-sohail-chowdhury/blob/master/testcases.md)
+Link to all the implemeted test cases [Tests](https://github.com/sohailchd/RobotAndLocust.git/blob/master/testcases.md)
 
 
 ## Getting Started
@@ -80,7 +80,7 @@ For running on **Ubuntu 18.04** make sure following are installed :
 ## **Installing python modules**
 For setting up on **windows/ubuntu** follow the below steps :  
 >
-    $ git clone https://git.toptal.com/milorad/basar-sohail-chowdhury.git     
+    $ git clone https://github.com/sohailchd/RobotAndLocust.git     
     $ cd basar-sohail-chowdhury     
     $ pip install -r requirements.txt     
 
@@ -214,6 +214,5 @@ This project is licensed under the MIT License.
 
 ## Acknowledgments
 
-* Toptal
 * NBA stats
 * football-dataorg

@@ -9,7 +9,7 @@
         <hudson.model.StringParameterDefinition>
           <name>start_test_dir</name>
           <description>describes which test are to be run</description>
-          <defaultValue>C:\Users\sohai\OneDrive\Desktop\scripts\toptal\basar-sohail-chowdhury\rest_api\pytest_api\test_pytest.py</defaultValue>
+          <defaultValue>C:\Users\sohai\OneDrive\Desktop\scripts\basar-sohail-chowdhury\rest_api\pytest_api\test_pytest.py</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>

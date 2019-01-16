@@ -1,5 +1,5 @@
 "Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
-"GET","/",238,0,820,959,97,2706,13797,15.90
-"POST","/client/login",161,0,910,1175,437,3153,14561,10.76
-"GET","/documentation/api",106,0,460,477,186,1279,73484,7.08
-"None","Total",505,0,730,927,97,3153,26568,33.74
+"GET","/",204,0,620,518,99,1050,13797,27.37
+"POST","/client/login",89,0,610,619,250,1221,14561,11.94
+"GET","/documentation/api",42,0,230,239,175,498,73484,5.63
+"None","Total",335,0,560,510,99,1221,21483,44.94
