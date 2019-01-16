@@ -2,8 +2,7 @@
 
 *   **NBA Automation (nba_automation)** Automates the  https://stats.nba.com/players/traditional/ 
 *   **Football-data org (rest_api)** Tests the API provided by football-data.org
-*   **Load Testing (load_test)** Load test on the hompage of on homepage of football-data.org
-
+*   **Load Testing (load_test)** Load test on the hompage of on homepage of any website
 Link to all the implemeted test cases [Tests](https://github.com/sohailchd/RobotAndLocust.git/blob/master/testcases.md)
 
 
@@ -215,4 +214,4 @@ This project is licensed under the MIT License.
 ## Acknowledgments
 
 * NBA stats
-* football-dataorg
+
