@@ -3,7 +3,7 @@
 *   **NBA Automation (nba_automation)** Automates the  https://stats.nba.com/players/traditional/ 
 *   **Football-data org (rest_api)** Tests the API provided by football-data.org
 *   **Load Testing (load_test)** Load test on the hompage of on homepage of any website
-Link to all the implemeted test cases [Tests](https://github.com/sohailchd/RobotAndLocust.git/blob/master/testcases.md)
+Link to all the implemeted test cases [Tests](https://github.com/sohailchd/RobotAndLocust/blob/master/testcases.md)
 
 
 ## Getting Started
